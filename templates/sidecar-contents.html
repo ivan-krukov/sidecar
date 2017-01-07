@@ -35,12 +35,14 @@
     var root = this.root = this.createShadowRoot();
     this.root.appendChild(clone);
 
-    var ipc = require('ipc');
+    var ipc = require('electron').ipcRenderer;
 
     var container = this.root.getElementById('container');
 
     var sidecar = new Sidecar(container, importDoc);
-    ipc.on('message', sidecar.consume.bind(sidecar));
+    ipc.on('message', function(event, message) {
+      sidecar.consume(message);
+    });
   };
 
   document.registerElement('sidecar-contents', {prototype: resultPrototype});

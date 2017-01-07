@@ -1,7 +1,7 @@
 <!-- Footer component -->
 
 <script>
-var ipc = require('ipc');
+var ipc = require('electron').ipcRenderer;
 </script>
 
 
@@ -87,7 +87,11 @@ var ipc = require('ipc');
 
     this.root.querySelector("#status").textContent = this.getAttribute("status") || "idle";
 
-    ipc.on('message', this.acceptKernelMessage.bind(this));
+    ipc.on('message', function(event, message) {
+      if(message && message.header && message.header.msg_type === "status"){
+        this.acceptKernelMessage.bind(this);
+      }
+    });
 
   };
 

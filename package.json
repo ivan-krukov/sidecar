@@ -1,6 +1,6 @@
 {
   "name": "jupyter-sidecar",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Little side display of Jupyter kernel rich output",
   "main": "app.js",
   "bin": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/rgbkrk/jupyter-sidecar.git"
+    "url": "https://github.com/nteract/sidecar.git"
   },
   "keywords": [
     "jupyter",
@@ -22,26 +22,18 @@
     "url": "https://github.com/rgbkrk/jupyter-sidecar/issues"
   },
   "homepage": "https://github.com/rgbkrk/jupyter-sidecar",
-  "electronVersion": "0.33.0",
   "dependencies": {
-    "electron-prebuilt": "0.33.0",
-    "jmp": "0.2.0",
+    "jmp": "^0.7.5",
     "jupyter-js-output-area": "0.0.5",
-    "jupyter-paths": "^0.3.1",
-    "node-gyp": "^2.0.1",
+    "jupyter-paths": "^0.3.5",
     "watch": "^0.16.0",
-    "zmq": "^2.12.0"
+    "zeromq": "^4.1.1"
   },
   "scripts": {
-    "start": "electron app.js",
-    "postinstall": "npm run build:zmq",
-    "build:zmq": "HOME=~/.electron-gyp cd node_modules/zmq && node-gyp rebuild --target=0.33.0 --arch=x64 --dist-url=https://atom.io/download/atom-shell",
-    "build:linux": "docker build -t rgbkrk/sidecar .",
-    "build:copy-linux-artifacts": "docker cp `docker run -d rgbkrk/sidecar echo ''`:/srv/sidecar/SideCar-linux-x64.tgz build && cp SideCar.app build/",
-    "build:osx": "electron-packager ./ SideCar --platform=darwin --arch=x64 --version=0.33.0",
-    "release": "npm run build-docker && npm run build-osx && npm run copy-artifacts"
+    "start": "electron app.js"
   },
   "devDependencies": {
-    "electron-packager": "^4.1.3"
+    "electron": "^1.4.13",
+    "electron-packager": "^4.2.0"
   }
 }

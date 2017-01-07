@@ -1,10 +1,11 @@
 #!/usr/bin/env electron
 "use strict";
 
-var app = require('app');  // Electron app
-var BrowserWindow = require('browser-window');  // Creating Browser Windows
+var electron = require('electron');
+var app = electron.app;
+var BrowserWindow = electron.BrowserWindow;
 
-var globalShortcut = require('global-shortcut');
+//var globalShortcut = require('global-shortcut');
 
 var jupyter = require("./lib/jupyter.js");
 var RuntimeWatch = require("./lib/runtime-watch.js");
@@ -12,7 +13,7 @@ var RuntimeWatch = require("./lib/runtime-watch.js");
 var jp = require('jupyter-paths');
 
 // Report crashes to our server.
-require('crash-reporter').start();
+//electron.crash-reporter.start();
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {
@@ -35,7 +36,7 @@ function launchSideCar(session) {
   });
 
   // and load the index.html of the app.
-  sideCar.loadUrl('file://' + __dirname + '/index.html');
+  sideCar.loadURL('file://' + __dirname + '/index.html');
 
   sideCar.webContents.on('did-finish-load', function () {
     session.on(function (message) {
@@ -134,7 +135,7 @@ var kw = new RuntimeWatch(updateKernel, jp.paths.runtime[0]);
 
 // This method will be called when Electron has done every
 // initialization and is ready for creating browser windows.
-app.on('ready', function() {
+/*app.on('ready', function() {
 		globalShortcut.register('Alt+CmdOrCtrl+I', function () {
 			var win = BrowserWindow.getFocusedWindow();
 
@@ -150,4 +151,4 @@ app.on('ready', function() {
 				win.reloadIgnoringCache();
 			}
 		});
-});
+});*/

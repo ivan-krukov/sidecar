@@ -34,8 +34,8 @@ in separate terminals, sidecar views will pop up automagically.
 After cloning this repository and `cd`ing into the directory, run this:
 
 ```
-$ npm install -g electron-prebuilt
 $ npm install
+$ npm rebuild zeromq --runtime=electron --target=$(npm view electron version)
 ```
 
 To run the local copy, use `npm run start`
